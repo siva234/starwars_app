@@ -1,4 +1,6 @@
 import React, {useState} from 'react';
+import styles from './SortMenu.module.css';
+
 import {Button, Menu, MenuItem} from '@material-ui/core';
 
 function SortMenu({handleSortMenuItemClick}) {
@@ -13,20 +15,20 @@ function SortMenu({handleSortMenuItemClick}) {
       };
     
     return (
-        <div>
-            <Button className="SortMenuBtn" aria-controls="simple-menu" aria-haspopup="true" onClick={handleSortMenuClick}>
-                Sort by...
-              </Button>
-              <Menu
-                id="simple-menu"
-                anchorEl={anchorEl}
-                keepMounted
-                open={Boolean(anchorEl)}
-                onClose={handleSortMenuClose}
-              >
-                <MenuItem onClick={(event) => {handleSortMenuItemClick(event, 1); handleSortMenuClose();}}>Episode</MenuItem>
-                <MenuItem onClick={(event) => {handleSortMenuItemClick(event, 2); handleSortMenuClose();}}>Year</MenuItem>
-              </Menu>
+        <div className={styles.SortMenu}>
+          <Button className={styles.SortMenuBtn} aria-controls="simple-menu" aria-haspopup="true" onClick={handleSortMenuClick}>
+            Sort by...
+          </Button>
+          <Menu
+            id="simple-menu"
+            anchorEl={anchorEl}
+            keepMounted
+            open={Boolean(anchorEl)}
+            onClose={handleSortMenuClose}
+          >
+            <MenuItem onClick={(event) => {handleSortMenuItemClick(event, 1); handleSortMenuClose();}}>Episode</MenuItem>
+            <MenuItem onClick={(event) => {handleSortMenuItemClick(event, 2); handleSortMenuClose();}}>Year</MenuItem>
+          </Menu>
         </div>
     )
 }
