@@ -2,10 +2,10 @@ import React, {useEffect, useState} from 'react';
 import './App.css';
 import Movielist from './components/MovieList/MovieList';
 import SideDisplay from './components/SideDisplay/SideDisplay';
-import {Grid, Button, Menu, MenuItem, Input} from '@material-ui/core';
+import SortMenu from './components/SortMenu/SortMenu';
+import {Grid, Button, Input} from '@material-ui/core';
 
 function App() {
-  const [anchorEl, setAnchorEl] = useState(null);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [filmsData, setFilmsData] = useState([]);
   const [displayData, setDisplayData] = useState([]);
@@ -17,22 +17,9 @@ function App() {
       .then(data => setFilmsData(data));
   }, [])
 
-  const handleSortMenuClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
   const handleSortMenuItemClick = (event, index) => {
     setSelectedIndex(index);
-    setAnchorEl(null);
   };
-
-  const handleSortMenuClose = () => {
-    setAnchorEl(null);
-  };
-
-  const handleMovieClick = (value) =>{
-    setDisplayData(value);
-  }
 
   useEffect(() => {
     let sorted = [...filmsData];
@@ -61,27 +48,17 @@ function App() {
     let val = event.target.value;
     setSearchWord(val);
   }
+
+  const handleMovieClick = (value) =>{
+    setDisplayData(value);
+  }
   
   return (
     <Grid container justify="center" className="App" spacing={2}>
       <Grid item xs={12} className="TopBar">
         <Grid container justify="center" spacing={2} >
-          <Grid item xs={4} className="SortMenuContainer">
-            <div>
-              <Button className="SortMenuBtn" aria-controls="simple-menu" aria-haspopup="true" onClick={handleSortMenuClick}>
-                Sort by...
-              </Button>
-              <Menu
-                id="simple-menu"
-                anchorEl={anchorEl}
-                keepMounted
-                open={Boolean(anchorEl)}
-                onClose={handleSortMenuClose}
-              >
-                <MenuItem onClick={(event) => handleSortMenuItemClick(event, 1)}>Episode</MenuItem>
-                <MenuItem onClick={(event) => handleSortMenuItemClick(event, 2)}>Year</MenuItem>
-              </Menu>
-            </div>
+          <Grid item xs={3} className="SortMenuContainer">
+            <SortMenu handleSortMenuItemClick={handleSortMenuItemClick} />
           </Grid>
           <Grid item xs={8} className="SearchBoxContainer">
             <Input className="SearchBox" type="text" value={searchWord.value} onChange={handleSearchChange}/>
