@@ -4,7 +4,25 @@
   flex-grow: 1;
   border: 1px solid red;
 }
+.TopBar{
+  background-color: #f7f8fa;
+  min-height: 80px;
+}
+.SortMenuContainer{
+  margin: 20px;
+}
+.SearchBoxContainer{
+  border: 1px solid black;
+}
+.SortMenuBtn{
+  border: 1px solid gray !important;
+  border-radius: 25px;
+}
 .Containers{
   padding: 10px;
   border: 1px solid black;
+}
+.MovieListItems{
+  width: 100%;
+  margin-top: 10px;
 }
